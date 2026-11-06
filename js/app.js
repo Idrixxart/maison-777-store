@@ -1,6 +1,7 @@
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const F=n=>n.toLocaleString('fr-FR').replace(/\u202f/g,' ')+' FCFA';
-let cart=[];try{cart=JSON.parse(localStorage.getItem('c777')||'[]')}catch(_){}
+const prix=x=>x==null?'Prix sur demande':F(x);
+let cart=[];try{cart=JSON.parse(localStorage.getItem('c777-v2')||'[]')}catch(_){}
 let cur=null,taille='M';
 
 // Préchargeur 777 (une seule fois par visite)
@@ -20,8 +21,16 @@ if($('#mq'))$('#mq').innerHTML=Array(12).fill('777 ✦ Maison 777 Store ✦ ').j
 // Grille Instagram
 if($('#igg'))$('#igg').innerHTML=P.slice(0,6).map((x,i)=>'<a class="rv" href="'+IG+'" target="_blank" rel="noopener" aria-label="Voir sur Instagram" style="background-image:linear-gradient(180deg,rgba(20,18,16,.15),rgba(20,18,16,.42)),url(\''+x.img+'\')"></a>').join('');
 
+// Galerie des visuels et vidéos
+if($('#media-grid'))$('#media-grid').innerHTML=M.map((x,i)=>'<figure class="media-card rv" data-kind="'+x.type+'">'+(x.type==='video'?'<video controls muted playsinline preload="none" poster="'+x.poster+'" aria-label="'+x.title+'"><source src="'+x.src+'" type="video/mp4"></video>':'<img src="'+x.src+'" alt="'+x.title+'" loading="lazy">')+'<figcaption>'+x.title+'</figcaption></figure>').join('');
+$$('#media-filters button').forEach(b=>b.onclick=()=>{
+  $$('#media-filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  const f=b.dataset.mediaFilter;
+  $$('.media-card').forEach(x=>x.hidden=f!=='tout'&&x.dataset.kind!==f);
+});
+
 // Collection
-if($('#gr'))$('#gr').innerHTML=P.map((x,i)=>'<article class="pr rv" data-t="'+x.t+'"><div class="car"><div class="vis" data-i="'+i+'" tabindex="0" role="button" aria-label="Aperçu '+x.n+'" style="background-image:linear-gradient(180deg,rgba(20,18,16,.08),rgba(20,18,16,.3)),url(\''+x.img+'\')"></div><h3>'+x.n+'</h3><div class="inf"><span>'+F(x.p)+'</span><button class="add" data-i="'+i+'">Ajouter</button></div></div></article>').join('');
+if($('#gr'))$('#gr').innerHTML=P.map((x,i)=>'<article class="pr rv" data-t="'+x.t+'"><div class="car"><div class="vis" data-i="'+i+'" tabindex="0" role="button" aria-label="Aperçu '+x.n+'" style="background-image:linear-gradient(180deg,rgba(20,18,16,.08),rgba(20,18,16,.3)),url(\''+x.img+'\')"></div><h3>'+x.n+'</h3><div class="inf"><span>'+prix(x.p)+'</span><button class="add" data-i="'+i+'">Ajouter</button></div></div></article>').join('');
 $$('.fil button').forEach(b=>b.onclick=()=>{
   $$('.fil button').forEach(x=>x.setAttribute('aria-pressed',x===b));
   const f=b.dataset.f;
@@ -62,10 +71,10 @@ function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clea
 function ajouter(i,t){const k=i+'-'+t,l=cart.find(c=>c.k===k);l?l.q++:cart.push({k,i,t,q:1});
   toast(P[i].n+' ajouté');const b=$('#pan');b.classList.remove('bump');void b.offsetWidth;b.classList.add('bump');rendre()}
 function rendre(){
-  $('#nb').textContent=cart.reduce((a,c)=>a+c.q,0);try{localStorage.setItem('c777',JSON.stringify(cart))}catch(_){}
-  $('#liste').innerHTML=cart.length?cart.map((c,j)=>'<div class="li"><div class="mini" style="background-image:linear-gradient(180deg,rgba(20,18,16,.08),rgba(20,18,16,.28)),url(\''+P[c.i].img+'\')"></div><div><strong>'+P[c.i].n+'</strong><br><small>Taille '+c.t+' · '+F(P[c.i].p)+'</small></div><div class="q"><button data-j="'+j+'" data-s="-1" aria-label="Moins">−</button>'+c.q+'<button data-j="'+j+'" data-s="1" aria-label="Plus">+</button></div></div>').join(''):'<p>Ton panier est vide. Choisis une pièce dans la collection.</p>';
-  const tot=cart.reduce((a,c)=>a+c.q*P[c.i].p,0);$('#tt').textContent=F(tot);
-  const msg='Bonjour Maison 777, je souhaite commander :\n'+cart.map(c=>'- '+c.q+' x '+P[c.i].n+' (taille '+c.t+')').join('\n')+'\nTotal : '+F(tot);
+  $('#nb').textContent=cart.reduce((a,c)=>a+c.q,0);try{localStorage.setItem('c777-v2',JSON.stringify(cart))}catch(_){}
+  $('#liste').innerHTML=cart.length?cart.map((c,j)=>'<div class="li"><div class="mini" style="background-image:linear-gradient(180deg,rgba(20,18,16,.08),rgba(20,18,16,.28)),url(\''+P[c.i].img+'\')"></div><div><strong>'+P[c.i].n+'</strong><br><small>Taille '+c.t+' · '+prix(P[c.i].p)+'</small></div><div class="q"><button data-j="'+j+'" data-s="-1" aria-label="Moins">−</button>'+c.q+'<button data-j="'+j+'" data-s="1" aria-label="Plus">+</button></div></div>').join(''):'<p>Ton panier est vide. Choisis une pièce dans la collection.</p>';
+  const totalConnu=cart.every(c=>P[c.i].p!=null),tot=cart.reduce((a,c)=>a+c.q*(P[c.i].p||0),0);$('#tt').textContent=totalConnu?F(tot):'À confirmer';
+  const msg='Bonjour Maison 777, je souhaite commander :\n'+cart.map(c=>'- '+c.q+' x '+P[c.i].n+' (taille '+c.t+')').join('\n')+'\nPrix et disponibilité : à confirmer';
   $('#cmd').dataset.msg=msg;
 }
 $('#liste').onclick=e=>{const b=e.target.closest('button');if(!b)return;const c=cart[b.dataset.j];c.q+=+b.dataset.s;if(c.q<1)cart.splice(b.dataset.j,1);rendre()};
@@ -79,7 +88,7 @@ rendre();
 if($('#gr'))$('#gr').onclick=e=>{const a=e.target.closest('.add'),v=e.target.closest('.vis');
   if(a)ajouter(+a.dataset.i,'M');else if(v)ouvrir(+v.dataset.i)};
 if($('#gr'))$('#gr').onkeydown=e=>{if(e.key==='Enter'&&e.target.classList.contains('vis'))ouvrir(+e.target.dataset.i)};
-function ouvrir(i){cur=i;taille='M';const x=P[i];$('#mv').className='vis';$('#mv').style.backgroundImage='linear-gradient(180deg,rgba(20,18,16,.08),rgba(20,18,16,.3)),url(\''+x.img+'\')';$('#mn').textContent=x.n;$('#md').textContent=x.d;$('#mp').textContent=F(x.p);
+function ouvrir(i){cur=i;taille='M';const x=P[i];$('#mv').className='vis';$('#mv').style.backgroundImage='linear-gradient(180deg,rgba(20,18,16,.08),rgba(20,18,16,.3)),url(\''+x.img+'\')';$('#mn').textContent=x.n;$('#md').textContent=x.d;$('#mp').textContent=prix(x.p);
   $('#tl').innerHTML=['S','M','L','XL'].map(s=>'<button aria-pressed="'+(s==='M')+'">'+s+'</button>').join('');$('#mod').classList.add('on')}
 $('#tl').onclick=e=>{const b=e.target.closest('button');if(!b)return;taille=b.textContent;$$('#tl button').forEach(x=>x.setAttribute('aria-pressed',x===b))};
 $('#ma').onclick=()=>{ajouter(cur,taille);$('#mod').classList.remove('on')};
