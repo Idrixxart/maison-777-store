@@ -2,6 +2,8 @@
 (()=>{
   const WHATSAPP='2250787584666';
   const WAVE_URL='https://pay.wave.com/m/M_ci_27GUIufBJ3YF/c/ci/';
+  const DELIVERY_KEY='maison777-delivery-v1';
+  function getSavedDelivery(){try{const value=JSON.parse(localStorage.getItem(DELIVERY_KEY)||'null');return value&&typeof value==='object'?value:null}catch(error){console.error('Lecture des informations de livraison impossible.',error);return null}}
   const cmd=$('#cmd');
   cmd.textContent='Valider mon panier';
   cmd.href='#checkout-stage';
@@ -12,8 +14,8 @@
   stage.setAttribute('aria-labelledby','checkout-title');
   stage.innerHTML=[
     "<h3 id='checkout-title'>Informations de commande et livraison</h3>",
-    '<p>Les frais de livraison seront confirmés par Maison 777 avant le paiement. Aucun compte Google n’est nécessaire.</p>',
-    "<p><span id='checkout-count'>Articles : 0</span> · Sous-total : <strong id='checkout-total'>À confirmer</strong></p>",
+    '<p>Les frais affichés sont estimatifs et doivent être confirmés par Maison 777 avant le paiement. Aucun compte Google n’est nécessaire.</p>',
+    "<p><span id='checkout-count'>Articles : 0</span> · Total estimé : <strong id='checkout-total'>À confirmer</strong></p>",
     "<form id='checkout-form'>",
     "<label for='delivery-name'>Nom et prénom</label><input id='delivery-name' name='name' autocomplete='name' required>",
     "<label for='delivery-phone'>Téléphone</label><input id='delivery-phone' name='phone' type='tel' autocomplete='tel' placeholder='+225…' required>",
@@ -53,6 +55,24 @@
     if(query){link.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(query);link.hidden=false}
     else link.hidden=true;
   }
+  const savedDelivery=getSavedDelivery();
+  if(savedDelivery){
+    $('#delivery-phone').value=savedDelivery.phone||'';
+    $('#delivery-commune').value=savedDelivery.zone&&savedDelivery.zone!=='À confirmer'?savedDelivery.zone+', Abidjan':'Abidjan (zone à confirmer)';
+    $('#delivery-district').value=savedDelivery.location||'';
+    $('#delivery-address').value=savedDelivery.location||'';
+    if(savedDelivery.coordinates)$('#delivery-gps').value=savedDelivery.coordinates.latitude+', '+savedDelivery.coordinates.longitude;
+    updateMap();
+  }
+  window.addEventListener('maison777:delivery-saved',event=>{
+    const delivery=event.detail;if(!delivery)return;
+    $('#delivery-phone').value=delivery.phone||'';
+    $('#delivery-commune').value=delivery.zone&&delivery.zone!=='À confirmer'?delivery.zone+', Abidjan':'Abidjan (zone à confirmer)';
+    $('#delivery-district').value=delivery.location||'';
+    $('#delivery-address').value=delivery.location||'';
+    if(delivery.coordinates)$('#delivery-gps').value=delivery.coordinates.latitude+', '+delivery.coordinates.longitude;
+    updateMap();
+  });
   ['delivery-address','delivery-district','delivery-commune'].forEach(id=>$('#'+id).addEventListener('input',updateMap));
   $('#checkout-location').onclick=()=>{
     const status=$('#checkout-location-status');
@@ -79,6 +99,7 @@
   cmd.onclick=e=>{
     e.preventDefault();
     if(!cart.length){toast('Ajoute une pièce d’abord');return}
+    const saved=getSavedDelivery();if(saved){$('#delivery-phone').value=saved.phone||'';$('#delivery-commune').value=saved.zone&&saved.zone!=='À confirmer'?saved.zone+', Abidjan':'Abidjan (zone à confirmer)';$('#delivery-district').value=saved.location||'';$('#delivery-address').value=saved.location||'';if(saved.coordinates)$('#delivery-gps').value=saved.coordinates.latitude+', '+saved.coordinates.longitude;updateMap()}
     $('#checkout-stage').hidden=false;
     $('#checkout-stage').scrollIntoView({block:'nearest',behavior:'smooth'});
   };
@@ -88,7 +109,8 @@
     updateMap();
     const known=cart.every(c=>P[c.i].p!=null);
     const total=cart.reduce((sum,c)=>sum+c.q*(P[c.i].p||0),0);
-    const ref='777-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+Math.random().toString(36).slice(2,7).toUpperCase();
+    const delivery=getSavedDelivery(),deliveryFee=delivery&&Number.isFinite(Number(delivery.fee))?Number(delivery.fee):null;
+    const ref=delivery&&delivery.orderRef?delivery.orderRef:'777-'+new Date().toISOString().slice(0,10).replace(/-/g,'')+'-'+Math.random().toString(36).slice(2,7).toUpperCase();
     const gps=$('#delivery-gps').value,map=$('#checkout-map').href,d=new FormData(e.currentTarget);
     const rows=cart.map(c=>{
       const p=P[c.i].p;
@@ -106,10 +128,13 @@
       gps?'GPS : '+gps:'GPS : non fourni',
       !$('#checkout-map').hidden?'Google Maps : '+map:'',
       'Articles :',...rows,
-      known?'Total articles : '+F(total):'Total articles : prix à confirmer',
-      'Livraison : frais à confirmer avec Maison 777 avant paiement',
+      known?'Sous-total articles : '+F(total):'Sous-total articles : prix à confirmer',
+      deliveryFee!==null?'Livraison estimée à '+(delivery.zone||'Abidjan')+' : '+F(deliveryFee):'Livraison : tarif à confirmer avec Maison 777',
+      known&&deliveryFee!==null?'Total estimé : '+F(total+deliveryFee):'Total final : à confirmer avec Maison 777 avant paiement',
       'Paiement : Wave, bénéficiaire IDRIXX — '+WAVE_URL
     ].filter(Boolean).join(String.fromCharCode(10));
+    const orderRecord={orderRef:ref,createdAt:new Date().toISOString(),customer:{name:String(d.get('name')||''),phone:String(d.get('phone')||'')},items:cart.map(c=>({name:P[c.i].n,size:c.t,quantity:c.q,unitPrice:P[c.i].p})),itemSubtotal:known?total:null,delivery:{location:String(d.get('address')||''),commune:String(d.get('commune')||''),district:String(d.get('district')||''),coordinates:gps||null,estimatedFee:deliveryFee},estimatedTotal:known&&deliveryFee!==null?total+deliveryFee:null,status:'awaiting-confirmation'};
+    try{const orders=JSON.parse(localStorage.getItem('maison777-orders-v1')||'[]');if(!Array.isArray(orders))throw new Error('Données de commande locales invalides');orders.push(orderRecord);localStorage.setItem('maison777-orders-v1',JSON.stringify(orders.slice(-20)))}catch(error){console.error('Enregistrement local de la commande impossible.',error);toast('Impossible d’enregistrer la commande sur cet appareil');return}
     const url='https://wa.me/'+WHATSAPP+'?text='+encodeURIComponent(text);
     $('#whatsapp-order-link').href=url;
     $('#checkout-after').hidden=false;
@@ -126,7 +151,8 @@
     });
     const count=cart.reduce((a,c)=>a+c.q,0),known=cart.every(c=>P[c.i].p!=null),sum=cart.reduce((a,c)=>a+c.q*(P[c.i].p||0),0);
     $('#checkout-count').textContent='Articles : '+count;
-    $('#checkout-total').textContent=known?F(sum):'À confirmer';
+    const delivery=getSavedDelivery(),fee=delivery&&Number.isFinite(Number(delivery.fee))?Number(delivery.fee):null;
+    $('#checkout-total').textContent=known?(fee===null?F(sum):F(sum+fee)):'À confirmer';
   };
   rendre();
   $('#liste').onclick=e=>{
