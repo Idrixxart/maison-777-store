@@ -266,3 +266,5 @@ body.ouvert #tiroir{transform:none}
 
 .editorial-video-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
 @media(max-width:560px){.editorial-video-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.editorial-media-section > .editorial-media-heading{position:static;inset:auto;z-index:auto;width:auto;transform:none;background:transparent}
