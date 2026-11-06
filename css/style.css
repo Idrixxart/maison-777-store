@@ -263,3 +263,6 @@ body.ouvert #tiroir{transform:none}
 .editorial-media-section .media-card figcaption{padding:.65rem 0;min-height:3rem;font:600 .82rem/1.4 var(--t);color:var(--ink)}
 @media(max-width:850px){.editorial-photo-grid,.editorial-video-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:560px){.editorial-media-section+.editorial-media-section{margin-top:3rem;padding-top:1.25rem}.editorial-photo-grid,.editorial-video-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}.editorial-media-section .media-card figcaption{font-size:.75rem;padding:.5rem 0;min-height:2.6rem}}
+
+.editorial-video-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))}
+@media(max-width:560px){.editorial-video-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
