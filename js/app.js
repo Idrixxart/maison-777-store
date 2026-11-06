@@ -22,11 +22,19 @@ if($('#mq'))$('#mq').innerHTML=Array(12).fill('777 ✦ Maison 777 Store ✦ ').j
 if($('#igg'))$('#igg').innerHTML=M.filter(x=>x.type==='photo').slice(0,6).map(x=>'<a class="rv" href="'+IG+'" target="_blank" rel="noopener" aria-label="Découvrir '+x.title+' sur Instagram" style="background-image:linear-gradient(180deg,rgba(20,18,16,.15),rgba(20,18,16,.42)),url(\''+x.src+'\')"></a>').join('');
 
 // Galerie des visuels et vidéos
-if($('#media-grid'))$('#media-grid').innerHTML=M.map((x,i)=>'<figure class="media-card rv" data-kind="'+x.type+'">'+(x.type==='video'?'<video controls muted playsinline preload="none" poster="'+x.poster+'" aria-label="'+x.title+'"><source src="'+x.src+'" type="video/mp4"></video>':'<img src="'+x.src+'" alt="'+x.title+'" loading="lazy">')+'<figcaption>'+x.title+'</figcaption></figure>').join('');
+if($('#media-grid')){
+  const gallery=$('#media-grid'),photos=M.filter(x=>x.type==='photo'),videos=M.filter(x=>x.type==='video');
+  const card=x=>'<figure class="media-card rv" data-kind="'+x.type+'">'+(x.type==='video'?'<video controls autoplay muted loop playsinline preload="none" poster="'+x.poster+'" aria-label="'+x.title+'"><source src="'+x.src+'" type="video/mp4"></video>':'<img src="'+x.src+'" alt="'+x.title+'" loading="lazy">')+'<figcaption>'+x.title+'</figcaption></figure>';
+  gallery.classList.add('editorial-gallery');
+  gallery.innerHTML='<section class="editorial-media-section editorial-photos" aria-labelledby="gallery-photos-title"><header class="editorial-media-heading"><p>01 / LA COLLECTION</p><h3 id="gallery-photos-title">Photographies</h3></header><div class="media-grid editorial-photo-grid">'+photos.map(card).join('')+'</div></section><section class="editorial-media-section editorial-videos" aria-labelledby="gallery-videos-title"><header class="editorial-media-heading"><p>02 / EN MOUVEMENT</p><h3 id="gallery-videos-title">Films et mouvements</h3></header><div class="media-grid editorial-video-grid">'+videos.map(card).join('')+'</div></section>';
+  const videoObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){const playback=entry.target.play();if(playback&&typeof playback.catch==='function')playback.catch(error=>console.warn('Lecture automatique de la vidéo impossible.',error))}else entry.target.pause()}),{threshold:.35});
+  gallery.querySelectorAll('video').forEach(video=>videoObserver.observe(video));
+}
 $$('#media-filters button').forEach(b=>b.onclick=()=>{
   $$('#media-filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));
   const f=b.dataset.mediaFilter;
-  $$('.media-card').forEach(x=>x.hidden=f!=='tout'&&x.dataset.kind!==f);
+  $('.media-card').forEach(x=>x.hidden=f!=='tout'&&x.dataset.kind!==f);
+  $('.editorial-media-section').forEach(section=>{section.hidden=!section.querySelector('.media-card:not([hidden])')});
 });
 
 // Collection
