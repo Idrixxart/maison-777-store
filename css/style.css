@@ -221,3 +221,30 @@ body.ouvert #tiroir{transform:none}
 #contact-methods{margin-top:1.2rem;padding-top:1rem;border-top:1px solid #dfe5eb}
 #contact-methods p{margin-bottom:.7rem}
 @media(max-width:600px){#contact-actions{right:50%;bottom:.75rem;transform:translateX(50%);flex-direction:row}.contact-action{min-width:106px;padding:.55rem .8rem}#checkout-stage{padding:.8rem}}
+
+/* Fenêtres holographiques des blocs d’accueil */
+.val .interactive-card{cursor:pointer;transition:transform .3s,box-shadow .3s}
+.val .interactive-card:focus-visible{outline:3px solid var(--copper);outline-offset:4px}
+#holo-overlay[hidden]{display:none!important}
+#holo-overlay{position:fixed;inset:0;z-index:120;display:grid;place-items:center;padding:1rem;background:rgba(16,25,38,.44);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .25s ease,visibility .25s ease}
+#holo-overlay.is-open{opacity:1;visibility:visible}
+.holo-dialog{position:relative;width:min(100%,520px);max-height:min(90dvh,760px);overflow:auto;padding:clamp(1.25rem,5vw,2rem);border:1px solid rgba(255,255,255,.62);border-radius:22px;background:rgba(248,251,255,.88);box-shadow:0 28px 90px rgba(11,24,40,.28),inset 0 1px rgba(255,255,255,.9);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);transform:translateY(14px) scale(.98);transition:transform .25s ease}
+#holo-overlay.is-open .holo-dialog{transform:translateY(0) scale(1)}
+.holo-close{position:absolute;top:.75rem;right:.75rem;display:grid;place-items:center;width:2.5rem;height:2.5rem;border:1px solid rgba(53,109,162,.2);border-radius:50%;background:rgba(255,255,255,.75);color:var(--ink);font-size:1.5rem}
+.holo-dialog h2{max-width:calc(100% - 2.5rem);margin-bottom:.55rem;font:800 clamp(1.5rem,5vw,2rem)/1.15 var(--d)}
+.holo-intro,.holo-note{color:#4d5663;font-size:.92rem}
+.holo-field{display:grid;gap:.45rem;margin-top:1rem}
+.holo-field label{font-weight:600}
+.holo-field input{width:100%;min-height:48px;padding:.7rem .85rem;border:1px solid #cbd6e2;border-radius:10px;background:rgba(255,255,255,.9);color:var(--ink);font:inherit}
+.holo-actions{display:flex;flex-wrap:wrap;gap:.65rem;margin-top:1.15rem}
+.holo-actions .btn,.holo-actions a{justify-content:center;min-height:46px}
+.holo-secondary{display:inline-flex;align-items:center;gap:.45rem;padding:.65rem .9rem;border:1px solid rgba(53,109,162,.28);border-radius:999px;background:rgba(255,255,255,.8);color:var(--ink);font-weight:600;text-decoration:none}
+.holo-status{min-height:1.5em;margin-top:.7rem;color:#28527b;font-size:.9rem}
+.holo-estimate{margin-top:1rem;padding:.9rem 1rem;border-left:3px solid var(--terracotta);border-radius:8px;background:rgba(255,255,255,.72)}
+.holo-estimate strong{display:block;font:800 1.15rem var(--d)}
+.holo-contact-list{display:grid;gap:.75rem;margin-top:1.25rem}
+.holo-contact{display:flex;align-items:center;gap:.8rem;min-height:54px;padding:.8rem 1rem;border:1px solid rgba(53,109,162,.2);border-radius:13px;background:rgba(255,255,255,.78);color:var(--ink);font-weight:600;text-decoration:none;transition:transform .2s,background .2s}
+.holo-contact:hover{transform:translateY(-2px);background:#fff}
+.holo-contact svg{width:22px;height:22px;flex:none;color:var(--copper-strong)}
+@media(max-width:600px){#holo-overlay{padding:.75rem}.holo-dialog{border-radius:18px}.holo-actions{flex-direction:column}.holo-actions>*{width:100%}}
+@media(prefers-reduced-motion:reduce){#holo-overlay,.holo-dialog,.holo-contact{transition:none}}
