@@ -1,7 +1,7 @@
 const IG='https://www.instagram.com/maison.777_store';
 const P=[
- {n:'Bandana blanc Maison 777',t:'acc',p:3000,v:0,img:'images/gallery/product-01.png',d:'Taille et disponibilité à confirmer par message.'},
- {n:'Bandana rose 777',t:'acc',p:3000,v:1,img:'images/gallery/product-02.png',d:'Taille et disponibilité à confirmer par message.'},
+ {n:'Mini serviette blanche Maison 777',t:'acc',p:3000,v:0,img:'images/gallery/product-01.png',d:'Taille et disponibilité à confirmer par message.'},
+ {n:'Mini serviette rose 777',t:'acc',p:3000,v:1,img:'images/gallery/product-02.png',d:'Taille et disponibilité à confirmer par message.'},
  {n:'Casquette 777',t:'acc',p:5000,v:2,img:'images/gallery/product-03.png',d:'Taille et disponibilité à confirmer par message.'},
  {n:'Chaussettes 777',t:'acc',p:2000,v:3,img:'images/gallery/product-04.png',d:'Taille et disponibilité à confirmer par message.'},
  {n:'Débardeur noir 777',t:'haut',p:5000,v:4,img:'images/gallery/product-05.png',d:'Taille et disponibilité à confirmer par message.'},
