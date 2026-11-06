@@ -195,3 +195,28 @@ body.ouvert #tiroir{transform:none}
  .sceau{opacity:.35}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.rv{opacity:1;transform:none}#pre{display:none}}
+
+/* Contact rapide et parcours de livraison */
+#contact-actions{position:fixed;right:1rem;bottom:1rem;z-index:35;display:flex;flex-direction:column;gap:.55rem}
+.contact-action{display:inline-flex;justify-content:center;align-items:center;min-width:112px;padding:.65rem 1rem;border-radius:999px;background:var(--ink);color:#fff;text-decoration:none;font-weight:700;box-shadow:0 6px 20px rgba(17,24,39,.2);transition:transform .2s,background .2s}
+.contact-action:first-child{background:#1b8255}
+.contact-action:last-child{background:var(--copper-strong)}
+.contact-action:hover{transform:translateY(-2px)}
+#checkout-stage{margin:1rem 0;padding:1rem;border:1px solid #dfe5eb;border-radius:14px;background:#fff}
+#checkout-stage[hidden],#checkout-after[hidden]{display:none!important}
+#checkout-stage h3{font:800 1.15rem var(--d);margin-bottom:.4rem}
+#checkout-stage p{font-size:.9rem;margin:.5rem 0}
+#checkout-form{display:grid;gap:.45rem}
+#checkout-form label{font-size:.88rem;font-weight:600;margin-top:.25rem}
+#checkout-form input:not([type=hidden]),#checkout-form textarea{width:100%;padding:.65rem .75rem;border:1px solid #cbd4dd;border-radius:8px;background:#fff;color:var(--ink);font:inherit}
+#checkout-form textarea{resize:vertical}
+.checkout-tools{display:flex;flex-wrap:wrap;gap:.5rem;margin:.5rem 0}
+.checkout-secondary{display:inline-flex;align-items:center;justify-content:center;padding:.55rem .8rem;border:1px solid var(--copper);border-radius:8px;background:#fff;color:var(--copper-strong);font:600 .88rem var(--t);text-decoration:none;cursor:pointer}
+#checkout-form .btn,#checkout-after .btn{width:100%;text-align:center;margin:.45rem 0}
+.fee-confirm{display:flex;gap:.5rem;align-items:flex-start;font-size:.88rem;margin:.6rem 0}
+.fee-confirm input{margin-top:.25rem;flex:none}
+.wave-link[aria-disabled=true]{opacity:.45;filter:grayscale(1);cursor:not-allowed;pointer-events:auto}
+.li .mini{object-fit:cover;background:none}
+#contact-methods{margin-top:1.2rem;padding-top:1rem;border-top:1px solid #dfe5eb}
+#contact-methods p{margin-bottom:.7rem}
+@media(max-width:600px){#contact-actions{right:50%;bottom:.75rem;transform:translateX(50%);flex-direction:row}.contact-action{min-width:106px;padding:.55rem .8rem}#checkout-stage{padding:.8rem}}
