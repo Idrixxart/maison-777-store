@@ -107,3 +107,5 @@ if($('#fm'))$('#fm').onsubmit=async e=>{e.preventDefault();
     e.target.reset();
   }catch(_){$('#ok').textContent='La copie automatique a échoué. Copie ton message puis envoie-le sur Instagram.'}
 };
+
+const deliveryScript=document.createElement('script');deliveryScript.src='js/checkout.js';deliveryScript.async=false;document.body.append(deliveryScript);
