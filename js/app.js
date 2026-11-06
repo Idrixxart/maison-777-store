@@ -74,14 +74,15 @@ function rendre(){
   $('#nb').textContent=cart.reduce((a,c)=>a+c.q,0);try{localStorage.setItem('c777-v2',JSON.stringify(cart))}catch(_){}
   $('#liste').innerHTML=cart.length?cart.map((c,j)=>'<div class="li"><div class="mini" style="background-image:linear-gradient(180deg,rgba(20,18,16,.08),rgba(20,18,16,.28)),url(\''+P[c.i].img+'\')"></div><div><strong>'+P[c.i].n+'</strong><br><small>Taille '+c.t+' · '+prix(P[c.i].p)+'</small></div><div class="q"><button data-j="'+j+'" data-s="-1" aria-label="Moins">−</button>'+c.q+'<button data-j="'+j+'" data-s="1" aria-label="Plus">+</button></div></div>').join(''):'<p>Ton panier est vide. Choisis une pièce dans la collection.</p>';
   const totalConnu=cart.every(c=>P[c.i].p!=null),tot=cart.reduce((a,c)=>a+c.q*(P[c.i].p||0),0);$('#tt').textContent=totalConnu?F(tot):'À confirmer';
-  const msg='Bonjour Maison 777, je souhaite commander :\n'+cart.map(c=>'- '+c.q+' x '+P[c.i].n+' (taille '+c.t+')').join('\n')+'\nPrix et disponibilité : à confirmer';
+  const msg='Bonjour Maison 777, je souhaite commander :\n'+cart.map(c=>'- '+c.q+' x '+P[c.i].n+' (taille '+c.t+')'+(P[c.i].p==null?'':' — '+F(P[c.i].p)+' l’unité')).join('\n')+'\n'+(totalConnu?'Total : '+F(tot):'Prix et disponibilité : à confirmer');
   $('#cmd').dataset.msg=msg;
 }
 $('#liste').onclick=e=>{const b=e.target.closest('button');if(!b)return;const c=cart[b.dataset.j];c.q+=+b.dataset.s;if(c.q<1)cart.splice(b.dataset.j,1);rendre()};
 $('#pan').onclick=()=>document.body.classList.add('ouvert');
 $('#fp').onclick=$('#ombre').onclick=()=>document.body.classList.remove('ouvert');
-$('#cmd').onclick=e=>{if(!cart.length){e.preventDefault();toast('Ajoute une pièce d’abord');return}
-  try{navigator.clipboard.writeText($('#cmd').dataset.msg);toast('Commande copiée : colle-la dans le message')}catch(_){}};
+$('#cmd').onclick=async e=>{if(!cart.length){e.preventDefault();toast('Ajoute une pièce d’abord');return}
+  try{await navigator.clipboard.writeText($('#cmd').dataset.msg);toast('Commande copiée : colle-la dans le message')}
+  catch(_){toast('Copie impossible ici : recopie les articles depuis le panier')}};
 rendre();
 
 // Aperçu produit
@@ -97,8 +98,12 @@ $('#mod').onclick=e=>{if(e.target.id==='mod')$('#mod').classList.remove('on')};
 addEventListener('keydown',e=>{if(e.key==='Escape'){$('#mod').classList.remove('on');document.body.classList.remove('ouvert')}});
 
 // Contact : copie le message puis ouvre la discussion Instagram
-if($('#fm'))$('#fm').onsubmit=e=>{e.preventDefault();
+if($('#fm'))$('#fm').onsubmit=async e=>{e.preventDefault();
   const t='Bonjour Maison 777, ici '+$('#n').value+'. Sujet : '+$('#s').value+'.\n'+$('#m').value;
-  try{navigator.clipboard.writeText(t)}catch(_){}
   window.open('https://ig.me/m/maison.777_store','_blank','noopener');
-  $('#ok').textContent='Message copié. Colle-le dans la conversation Instagram qui vient de s’ouvrir.';e.target.reset()};
+  try{
+    await navigator.clipboard.writeText(t);
+    $('#ok').textContent='Message copié. Colle-le dans la conversation Instagram qui vient de s’ouvrir.';
+    e.target.reset();
+  }catch(_){$('#ok').textContent='La copie automatique a échoué. Copie ton message puis envoie-le sur Instagram.'}
+};
