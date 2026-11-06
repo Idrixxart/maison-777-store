@@ -33,8 +33,8 @@ if($('#media-grid')){
 $$('#media-filters button').forEach(b=>b.onclick=()=>{
   $$('#media-filters button').forEach(x=>x.setAttribute('aria-pressed',x===b));
   const f=b.dataset.mediaFilter;
-  $('.media-card').forEach(x=>x.hidden=f!=='tout'&&x.dataset.kind!==f);
-  $('.editorial-media-section').forEach(section=>{section.hidden=!section.querySelector('.media-card:not([hidden])')});
+  $$('.media-card').forEach(x=>x.hidden=f!=='tout'&&x.dataset.kind!==f);
+  $$('.editorial-media-section').forEach(section=>{section.hidden=!section.querySelector('.media-card:not([hidden])')});
 });
 
 // Collection
