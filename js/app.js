@@ -19,7 +19,7 @@ const D=pre&&premiere?2.6:.1;
 if($('#mq'))$('#mq').innerHTML=Array(12).fill('777 ✦ Maison 777 Store ✦ ').join('');
 
 // Grille Instagram
-if($('#igg'))$('#igg').innerHTML=P.slice(0,6).map((x,i)=>'<a class="rv" href="'+IG+'" target="_blank" rel="noopener" aria-label="Voir sur Instagram" style="background-image:linear-gradient(180deg,rgba(20,18,16,.15),rgba(20,18,16,.42)),url(\''+x.img+'\')"></a>').join('');
+if($('#igg'))$('#igg').innerHTML=M.filter(x=>x.type==='photo').slice(0,6).map(x=>'<a class="rv" href="'+IG+'" target="_blank" rel="noopener" aria-label="Découvrir '+x.title+' sur Instagram" style="background-image:linear-gradient(180deg,rgba(20,18,16,.15),rgba(20,18,16,.42)),url(\''+x.src+'\')"></a>').join('');
 
 // Galerie des visuels et vidéos
 if($('#media-grid'))$('#media-grid').innerHTML=M.map((x,i)=>'<figure class="media-card rv" data-kind="'+x.type+'">'+(x.type==='video'?'<video controls muted playsinline preload="none" poster="'+x.poster+'" aria-label="'+x.title+'"><source src="'+x.src+'" type="video/mp4"></video>':'<img src="'+x.src+'" alt="'+x.title+'" loading="lazy">')+'<figcaption>'+x.title+'</figcaption></figure>').join('');
