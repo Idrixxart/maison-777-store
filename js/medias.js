@@ -23,14 +23,11 @@ const M=[
  {type:'photo',title:'T-shirt blanc graphique 777',src:'images/gallery/product-18.png'},
  {type:'photo',title:'T-shirt crop rose 777',src:'images/gallery/product-19.png'},
  {type:'photo',title:'T-shirt noir carte rouge',src:'images/gallery/product-20.png'},
- {type:'photo',title:'Logo 777 en lumière',src:'images/gallery/product-logo.png'},
- {type:'photo',title:'Logo Maison 777',src:'images/gallery/logo.png'},
  {type:'photo',title:'Shooting Maison 777',src:'images/gallery/shooting-01.png'},
  {type:'photo',title:'Jean large 777',src:'images/gallery/shooting-02.png'},
  {type:'photo',title:'Portrait urbain — t-shirt 777',src:'images/gallery/shooting-03.png'},
  {type:'photo',title:'Streetwear urbain',src:'images/gallery/shooting-04.png'},
  {type:'video',title:'Vidéo de couverture',src:'videos/video-couverture.mp4',poster:'images/gallery/cover-02.png'},
- {type:'video',title:'Film publicitaire Maison 777',src:'https://github.com/Idrixxart/maison-777-store/releases/download/v1.0/video-publicite.mp4',poster:'images/gallery/cover-01.png'},
  {type:'video',title:'Animation 777',src:'videos/video-animation.mp4',poster:'images/gallery/cover-03.png'},
  {type:'video',title:'Shooting vidéo',src:'videos/video-shooting.mp4',poster:'images/gallery/shooting-03.png'}
 ];
