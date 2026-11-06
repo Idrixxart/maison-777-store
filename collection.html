@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Collection – Maison 777 Store</title>
+<meta name="description" content="Toute la collection Maison 777 Store.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;800&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="collection">
+
+<div id="glow"></div>
+
+<header id="hd">
+  <div class="w">
+    <a class="logo" href="index.html">MAISON <b>777</b></a>
+    <button id="bg" aria-label="Menu">☰</button>
+    <nav id="nav" aria-label="Navigation principale">
+      <a class="l" href="index.html">Accueil</a>
+      <a class="l" href="collection.html">Collection</a>
+      <a class="l" href="contact.html">Contact</a>
+      <a class="ico" href="https://www.instagram.com/maison.777_store" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>Instagram</a>
+      <button class="ico" id="pan" aria-label="Ouvrir le panier">Panier <span id="nb">0</span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="page actif" id="collection">
+  <div class="top"><div class="w"><h1>La collection</h1></div></div>
+  <div class="sec w" style="padding-top:2rem">
+    <div class="fil" role="group" aria-label="Filtrer par type">
+      <button aria-pressed="true" data-f="tout">Tout</button><button aria-pressed="false" data-f="haut">Hauts</button><button aria-pressed="false" data-f="bas">Bas</button><button aria-pressed="false" data-f="acc">Accessoires</button>
+    </div>
+    <div class="gr" id="gr"></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="w"><span>© 2026 Maison 777 Store</span><a href="https://www.instagram.com/maison.777_store" target="_blank" rel="noopener">Instagram : @maison.777_store</a></div></footer>
+
+<div id="ombre"></div>
+<aside id="tiroir" aria-label="Panier">
+  <div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0;font-size:2rem">Panier</h2><button class="x" id="fp" aria-label="Fermer" style="position:static">×</button></div>
+  <div id="liste"></div>
+  <div class="tot"><span>Total</span><span id="tt">0 FCFA</span></div>
+  <a class="btn" id="cmd" href="https://ig.me/m/maison.777_store" target="_blank" rel="noopener" style="text-align:center">Commander sur Instagram</a>
+</aside>
+
+<div id="mod" role="dialog" aria-modal="true" aria-label="Aperçu du produit"><div class="mb">
+  <button class="x" id="fm2" aria-label="Fermer">×</button>
+  <div class="vis" id="mv"></div>
+  <div><h2 id="mn" style="font-size:2rem"></h2><p id="md"></p><p class="prix" id="mp" style="font-weight:600;margin-top:.5rem"></p>
+  <div class="tl" id="tl"></div><button class="btn" id="ma">Ajouter au panier</button></div>
+</div></div>
+<div id="toast" role="status"></div>
+
+<script src="js/produits.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
