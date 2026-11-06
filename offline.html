@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1c2735">
+<title>Hors connexion – Maison 777</title>
+<style>
+:root{--chiffre:#C8DDEE;color-scheme:dark}
+*{box-sizing:border-box;margin:0}
+body{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:1.5rem;text-align:center;background:linear-gradient(135deg,#1C2735 0%,#223652 50%,#2F6A9C 100%);color:var(--chiffre);font:400 1rem/1.6 system-ui,-apple-system,'Segoe UI',sans-serif}
+main{max-width:460px;width:100%}
+.slots{display:flex;gap:.4rem;justify-content:center;height:1em;overflow:hidden;font:800 clamp(5rem,24vw,11rem)/1 'Syne','Arial Black',Impact,sans-serif;color:var(--chiffre)}
+.slots div{height:1em;overflow:hidden}
+.slots span{display:block;transform:translateY(-7em);animation:cycle 4s infinite backwards}
+.slots div:nth-child(2) span{animation-delay:.3s}
+.slots div:nth-child(3) span{animation-delay:.6s}
+.slots i{display:block;height:1em;width:.72em;font-style:normal;line-height:1em}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@keyframes cycle{0%{transform:translateY(-7em)}25%{transform:translateY(-7em);animation-timing-function:cubic-bezier(.2,.9,.25,1)}85%{transform:translateY(-27em)}100%{transform:translateY(-27em)}}
+@media(prefers-reduced-motion:reduce){.slots span{animation:none}}
+</style>
+</head>
+<body>
+<main><div class="slots" id="slots" role="img" aria-label="777, Maison 777 hors connexion"></div><p class="sr-only">Le site Maison 777 sera ouvert lorsque la connexion sera rétablie.</p></main>
+<script>
+'use strict';
+const slots=document.getElementById('slots');
+slots.innerHTML=[0,1,2].map(()=>'<div><span>'+Array.from({length:30},(_,i)=>'<i>'+(i%10)+'</i>').join('')+'</span></div>').join('');
+let redirectPending=false,redirected=false;
+const goHome=()=>{if(!redirectPending||redirected)return;redirected=true;location.replace(new URL('./index.html',location.href).href)};
+async function checkConnection(){
+ if(redirectPending||redirected||navigator.onLine===false)return;
+ try{
+  const checkUrl=new URL('./index.html?__m777_network_check='+Date.now(),location.href);
+  const response=await fetch(checkUrl,{method:'HEAD',cache:'no-store'});
+  if(!response.ok)return;
+  redirectPending=true;
+  const lastRoll=slots.querySelector('div:last-child span');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches){setTimeout(goHome,250);return}
+  lastRoll.addEventListener('animationiteration',goHome,{once:true});
+  setTimeout(goHome,4800);
+ }catch(error){console.info('Maison 777 reste hors connexion.',error)}
+}
+addEventListener('online',checkConnection);
+setInterval(checkConnection,4000);
+checkConnection();
+</script>
+</body>
+</html>
