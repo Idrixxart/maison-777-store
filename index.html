@@ -12,10 +12,8 @@
 </head>
 <body data-page="index">
 
-
 <div id="pre" aria-hidden="true"><div class="slots" id="slots"></div></div>
 <div id="glow"></div>
-
 
 <header id="hd">
   <div class="w">
@@ -31,10 +29,85 @@
   </div>
 </header>
 
-
 <main>
 <section class="page actif" id="accueil">
   <div class="hero">
     <div class="f f1"></div><div class="f f2"></div>
     <svg class="sceau" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="c" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#c">MAISON 777 STORE ✦ MAISON 777 STORE ✦</textPath></text></svg>
     <div class="w">
+      <h1 id="titre" aria-label="Maison 777 Store"><span class="m"><span>Maison</span></span><span class="m g"><span>777</span></span><span class="m"><span>Store</span></span></h1>
+      <p>La mode qui porte chance. Des pièces choisies, des coupes affirmées, une signature à Abidjan.</p>
+      <div class="cta"><a class="btn" href="collection.html">Voir la collection</a><a class="btn v" href="https://www.instagram.com/maison.777_store" target="_blank" rel="noopener">Nous suivre sur Instagram</a></div>
+    </div>
+  </div>
+  <section class="spot sec" aria-labelledby="spot-title">
+    <div class="w">
+      <div class="spot-copy rv">
+        <img class="spot-logo" src="images/gallery/logo.png" alt="Logo officiel 777">
+        <p class="spot-kicker">LE FILM MAISON 777</p>
+        <h2 id="spot-title">Une signature. Un mouvement.</h2>
+        <p>Entrez dans l’univers Maison 777 à travers notre film publicitaire.</p>
+      </div>
+      <div class="spot-frame rv">
+        <video controls playsinline preload="none" poster="images/gallery/cover-01.png" aria-label="Film publicitaire Maison 777">
+          <source src="https://github.com/Idrixxart/maison-777-store/releases/download/v1.0/video-publicite.mp4" type="video/mp4">
+          Votre navigateur ne prend pas en charge la lecture vidéo. <a href="https://github.com/Idrixxart/maison-777-store/releases/download/v1.0/video-publicite.mp4">Télécharger le film publicitaire</a>.
+        </video>
+      </div>
+    </div>
+  </section>
+  <div class="band" aria-hidden="true"><div id="mq"></div></div>
+  <div class="sec w">
+    <div class="duo">
+      <div class="tissu rv" id="ti" role="img" aria-label="Collection Maison 777 sur portants"></div>
+      <div class="rv"><h2>Sept fois la chance.</h2><p>Maison 777 Store réunit des vêtements pour celles et ceux qui aiment qu’on les remarque sans qu’ils aient besoin d’élever la voix. Chaque pièce est sélectionnée pour sa coupe, sa matière et son caractère. Tout se passe d’abord sur Instagram, où chaque nouvel arrivage est dévoilé en avant-première.</p><br><a class="btn" href="https://www.instagram.com/maison.777_store" target="_blank" rel="noopener">Voir les nouveautés</a></div>
+    </div>
+    <div class="val">
+      <div class="rv"><h3>Pièces sélectionnées</h3><p>Peu de modèles, mais chacun a sa raison d’être.</p></div>
+      <div class="rv"><h3>Commande par message</h3><p>Choisis ta pièce, on finalise ensemble sur Instagram.</p></div>
+      <div class="rv"><h3>Livraison à Abidjan</h3><p>Remise en main propre ou livraison selon ta commune.</p></div>
+    </div>
+  </div>
+  <section class="lookbook sec" aria-labelledby="lookbook-title">
+    <div class="w">
+      <h2 class="rv" id="lookbook-title">La Maison en images et en mouvement</h2>
+      <p class="rv">Les créations, les looks et les coulisses de Maison 777.</p>
+      <div class="media-filters rv" id="media-filters" role="group" aria-label="Filtrer les médias">
+        <button type="button" aria-pressed="true" data-media-filter="tout">Tout</button>
+        <button type="button" aria-pressed="false" data-media-filter="photo">Photos</button>
+        <button type="button" aria-pressed="false" data-media-filter="video">Vidéos</button>
+      </div>
+      <div class="media-grid" id="media-grid" aria-live="polite"></div>
+    </div>
+  </section>
+  <div class="ig sec"><div class="w">
+    <h2 class="rv">L’univers Maison 777 sur Instagram</h2><p class="rv">Explorez une sélection de visuels Maison 777, puis ouvrez le profil officiel pour découvrir les publications publiques.</p>
+    <div class="igg" id="igg"></div>
+    <a class="btn" href="https://www.instagram.com/maison.777_store" target="_blank" rel="noopener">Ouvrir le profil</a>
+  </div></div>
+</section>
+</main>
+
+<footer><div class="w"><span>© 2026 Maison 777 Store</span><a href="https://www.instagram.com/maison.777_store" target="_blank" rel="noopener">Instagram : @maison.777_store</a></div></footer>
+
+<div id="ombre"></div>
+<aside id="tiroir" aria-label="Panier">
+  <div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0;font-size:2rem">Panier</h2><button class="x" id="fp" aria-label="Fermer" style="position:static">×</button></div>
+  <div id="liste"></div>
+  <div class="tot"><span>Total</span><span id="tt">0 FCFA</span></div>
+  <a class="btn" id="cmd" href="https://ig.me/m/maison.777_store" target="_blank" rel="noopener" style="text-align:center">Commander sur Instagram</a>
+</aside>
+
+<div id="mod" role="dialog" aria-modal="true" aria-label="Aperçu du produit"><div class="mb">
+  <button class="x" id="fm2" aria-label="Fermer">×</button>
+  <div class="vis" id="mv"></div>
+  <div><h2 id="mn" style="font-size:2rem"></h2><p id="md"></p><p class="prix" id="mp" style="font-weight:600;margin-top:.5rem"></p>
+  <div class="tl" id="tl"></div><button class="btn" id="ma">Ajouter au panier</button></div>
+</div></div>
+<div id="toast" role="status"></div>
+
+<script src="js/produits.js"></script>
+<script src="js/medias.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
