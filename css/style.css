@@ -7,7 +7,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .w{max-width:1180px;margin:0 auto;padding:0 1.25rem}
 
-/* Préchargeur : machine à sous 777 */
+/* PrÃ©chargeur : machine Ã  sous 777 */
 #pre{position:fixed;inset:0;background:linear-gradient(135deg,#2e1f1b,#593a30 60%,#b85b35);z-index:100;display:grid;place-items:center;transition:transform .9s cubic-bezier(.77,0,.18,1)}
 #pre.fin{transform:translateY(-100%)}
 .slots{display:flex;gap:.4rem;font:800 clamp(5rem,22vw,12rem)/1 var(--d);color:var(--gold);height:1em;overflow:hidden}
@@ -20,7 +20,7 @@ a{color:inherit}button{font:inherit;cursor:pointer}
 /* Curseur */
 #glow{position:fixed;width:340px;height:340px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(217,174,115,.28),transparent 65%);transform:translate(-50%,-50%);left:-400px;top:-400px}
 
-/* En-tête */
+/* En-tÃªte */
 header{position:fixed;inset:0 0 auto 0;z-index:20;transition:background .4s,transform .4s}
 header.sol{background:rgba(32,22,19,.94);backdrop-filter:blur(10px)}
 header.cache{transform:translateY(-100%)}
@@ -44,7 +44,7 @@ nav a.l:hover::after,nav a[aria-current]::after{transform:scaleX(1)}
 @keyframes pg{from{opacity:0;clip-path:inset(0 0 100% 0)}to{opacity:1;clip-path:inset(0)}}
 
 /* Hero */
-.hero{background:linear-gradient(120deg,rgba(31,21,17,.86),rgba(76,46,33,.62)),url("../images/hero-fashion.jpg") center/cover no-repeat;color:var(--ivory);min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;box-shadow:inset 0 0 80px rgba(0,0,0,.2)}
+.hero{background:linear-gradient(120deg,rgba(31,21,17,.82),rgba(76,46,33,.5)),url("../images/gallery/cover-01.png") center/cover no-repeat;color:var(--ivory);min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;box-shadow:inset 0 0 80px rgba(0,0,0,.2)}
 .hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at right center,rgba(217,174,115,.24),transparent 30%)}
 .hero .w{position:relative;z-index:2}
 .hero h1{font:800 clamp(3.4rem,15vw,11.5rem)/.88 var(--d);letter-spacing:-.04em;position:relative;z-index:2}
@@ -66,7 +66,7 @@ nav a.l:hover::after,nav a[aria-current]::after{transform:scaleX(1)}
 .f2{width:100px;height:100px;background:rgba(255,255,255,.18);left:42%;top:20%;animation-delay:-3s}
 @keyframes flotte{50%{transform:translateY(-40px) scale(1.08)}}
 
-/* Bandeau défilant */
+/* Bandeau dÃ©filant */
 .band{background:linear-gradient(90deg,var(--gold),#f1d2a1);color:var(--ink);overflow:hidden;white-space:nowrap;padding:.8rem 0;font:800 1.3rem var(--d)}
 .band div{display:inline-block;animation:def 24s linear infinite}
 .band:hover div{animation-play-state:paused}
@@ -75,13 +75,13 @@ nav a.l:hover::after,nav a[aria-current]::after{transform:scaleX(1)}
 .sec{padding-block:5rem}
 h2{font:800 clamp(2rem,6vw,3.6rem)/1 var(--d);letter-spacing:-.03em;margin-bottom:1.5rem}
 .duo{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:center}
-.tissu{aspect-ratio:4/5;border-radius:18px;box-shadow:0 24px 60px rgba(26,19,15,.12);background:linear-gradient(180deg,rgba(84,110,82,.14),rgba(24,17,14,.05)),url("../images/hero-detail.jpg") center/cover no-repeat;transition:transform .15s}
+.tissu{aspect-ratio:4/5;border-radius:18px;box-shadow:0 24px 60px rgba(26,19,15,.12);background:linear-gradient(180deg,rgba(84,110,82,.14),rgba(24,17,14,.05)),url("../images/gallery/cover-02.png") center/cover no-repeat;transition:transform .15s}
 .val{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:3rem}
 .val div{padding:1.5rem;border-left:4px solid var(--gold);background:rgba(255,255,255,.78);transition:transform .3s;box-shadow:0 16px 30px rgba(28,20,15,.04)}
 .val div:hover{transform:translateY(-8px)}
 .val h3{font:800 1.2rem var(--d)}
 
-/* Révélation au défilement */
+/* RÃ©vÃ©lation au dÃ©filement */
 .rv{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s cubic-bezier(.2,.8,.2,1)}
 .rv.on{opacity:1;transform:none}
 
@@ -98,7 +98,7 @@ h2{font:800 clamp(2rem,6vw,3.6rem)/1 var(--d);letter-spacing:-.03em;margin-botto
 .car{transition:transform .15s;transform-style:preserve-3d}
 .vis{aspect-ratio:3/4;border-radius:14px;margin-bottom:.8rem;position:relative;overflow:hidden;cursor:pointer;background-size:cover;background-position:center;box-shadow:0 16px 30px rgba(28,20,15,.12);border:1px solid rgba(28,20,15,.06)}
 .vis::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(37,26,22,.06),rgba(37,26,22,.38));}
-.vis::after{content:"Aperçu";position:absolute;inset:auto 0 0 0;background:linear-gradient(135deg,var(--gold),#f3d7ab);text-align:center;padding:.5rem;font-weight:700;color:var(--ink);transform:translateY(100%);transition:transform .3s;z-index:2}
+.vis::after{content:"AperÃ§u";position:absolute;inset:auto 0 0 0;background:linear-gradient(135deg,var(--gold),#f3d7ab);text-align:center;padding:.5rem;font-weight:700;color:var(--ink);transform:translateY(100%);transition:transform .3s;z-index:2}
 .vis:hover::after{transform:none}
 .v0{background:repeating-linear-gradient(45deg,var(--em) 0 18px,var(--or) 18px 24px)}
 .v1{background:radial-gradient(circle,var(--or) 0 18%,transparent 19%) 0 0/46px 46px,var(--vin)}
@@ -120,6 +120,19 @@ h2{font:800 clamp(2rem,6vw,3.6rem)/1 var(--d);letter-spacing:-.03em;margin-botto
 .igg a:hover{transform:scale(.96) rotate(-1deg)}
 .igg a::after{content:"@maison.777_store";position:absolute;inset:0;display:grid;place-items:center;background:rgba(35,24,20,.68);color:var(--gold);font-weight:700;opacity:0;transition:opacity .3s}
 .igg a:hover::after{opacity:1}
+
+/* Lookbook */
+.lookbook{background:linear-gradient(180deg,#f6efe8,#eadbcd)}
+.media-filters{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.6rem 0 2rem}
+.media-filters button{border:1px solid rgba(42,29,26,.35);background:rgba(255,255,255,.55);color:var(--ink);padding:.5rem 1.1rem;border-radius:999px;font-weight:700;transition:background .25s,color .25s,transform .25s}
+.media-filters button:hover{transform:translateY(-2px)}
+.media-filters button[aria-pressed=true]{background:var(--ink);border-color:var(--ink);color:var(--gold)}
+.media-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,210px),1fr));gap:1rem}
+.media-card{min-width:0;overflow:hidden;border-radius:14px;background:var(--ivory);box-shadow:0 14px 30px rgba(28,20,15,.09);transition:transform .3s,box-shadow .3s}
+.media-card:hover{transform:translateY(-5px);box-shadow:0 20px 36px rgba(28,20,15,.16)}
+.media-card[hidden]{display:none}
+.media-card img,.media-card video{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;background:#2e1f1b}
+.media-card figcaption{padding:.75rem .9rem;font:700 .95rem var(--d);min-height:3.3rem}
 
 /* Contact */
 .ct{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem}
@@ -144,7 +157,7 @@ body.ouvert #tiroir{transform:none}
 .li .q button{width:26px;height:26px;border-radius:50%;border:2px solid var(--ink);background:none}
 .tot{display:flex;justify-content:space-between;font:800 1.3rem var(--d);margin-bottom:1rem}
 
-/* Aperçu produit */
+/* AperÃ§u produit */
 #mod{position:fixed;inset:0;z-index:50;display:none;place-items:center;background:rgba(23,16,26,.7);padding:1rem}
 #mod.on{display:grid;animation:pg .4s}
 .mb{background:var(--lilas);border-radius:18px;max-width:760px;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;padding:1.5rem;position:relative;box-shadow:0 28px 80px rgba(14,10,10,.28)}
