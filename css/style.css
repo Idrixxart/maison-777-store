@@ -68,15 +68,16 @@ nav a.l:hover::after,nav a[aria-current]::after{transform:scaleX(1)}
 
 /* Film publicitaire */
 .spot{background:linear-gradient(180deg,#f3f6f9,#fff);color:var(--ink);overflow:hidden}
-.spot .w{padding-block:clamp(3rem,7vw,6rem)}
-.spot-copy{max-width:760px;margin:0 auto 2rem;text-align:center}
-.spot-logo{display:block;width:clamp(5rem,10vw,8rem);height:auto;margin:0 auto 1.25rem;padding:.4rem;object-fit:contain;border-radius:14px;background:#1d2938;filter:drop-shadow(0 8px 18px rgba(0,0,0,.16))}
+.spot .w{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(16rem,.8fr);align-items:center;gap:clamp(2rem,5vw,4rem);padding-block:clamp(3rem,7vw,6rem)}
+.spot-copy{max-width:none;margin:0;text-align:left}
+.spot-logo{display:block;width:clamp(5rem,10vw,8rem);height:auto;margin:0 0 1.25rem;padding:.4rem;object-fit:contain;border-radius:14px;background:#1d2938;filter:drop-shadow(0 8px 18px rgba(0,0,0,.16))}
 .spot-kicker{margin-bottom:.65rem;color:var(--terracotta);font:800 .8rem var(--d);letter-spacing:.18em}
 .spot h2{font:800 clamp(2rem,5vw,3.8rem)/1.08 var(--d)}
 .spot-copy>p:last-child{margin-top:.8rem;color:#4d5663}
-.spot-frame{max-width:1100px;margin:0 auto;padding:.45rem;border:1px solid rgba(223,143,148,.65);border-radius:20px;background:linear-gradient(135deg,rgba(141,182,217,.2),rgba(255,255,255,.04));box-shadow:0 28px 80px rgba(0,0,0,.32)}
-.spot video{display:block;width:100%;height:auto;max-height:78vh;object-fit:contain;border-radius:14px;background:#120d0d}
-@media(max-width:600px){.spot-frame{padding:.25rem;border-radius:14px}.spot video{border-radius:10px}}
+.spot-frame{max-width:none;margin:0;padding:.45rem;border:1px solid rgba(223,143,148,.65);border-radius:20px;background:linear-gradient(135deg,rgba(141,182,217,.2),rgba(255,255,255,.04));box-shadow:0 28px 80px rgba(0,0,0,.32)}
+.spot-cover{display:block;width:100%;height:auto;border-radius:14px}
+@media(max-width:800px){.spot .w{grid-template-columns:1fr;gap:1.75rem}.spot-frame{width:100%;max-width:680px;margin-inline:auto}.spot-copy{text-align:center}.spot-logo{margin-inline:auto;margin-bottom:1.25rem}}
+@media(max-width:600px){.spot-frame{padding:.25rem;border-radius:14px}.spot-cover{border-radius:10px}}
 
 
 /* Bandeau défilant */
