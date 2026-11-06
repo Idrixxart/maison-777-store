@@ -109,3 +109,4 @@ if($('#fm'))$('#fm').onsubmit=async e=>{e.preventDefault();
 };
 
 const deliveryScript=document.createElement('script');deliveryScript.src='js/checkout.js';deliveryScript.async=false;document.body.append(deliveryScript);
+deliveryScript.addEventListener('load',()=>{const submit=document.querySelector('#fm button[type="submit"]');if(submit)submit.textContent='Envoyer via WhatsApp';const note=[...document.querySelectorAll('#contact .ct p')].find(p=>p.textContent.includes('formulaire copie'));if(note)note.textContent='Le formulaire ouvre WhatsApp avec ton message prérempli. Appuie sur Envoyer pour nous l’adresser.'});
